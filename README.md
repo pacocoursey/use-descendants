@@ -194,7 +194,7 @@ The parent list then queries the DOM for all elements with `[data-descendant]` a
 In the parent, we can use `list` and `map` to retrieve information about each descendant. For example, if we wanted the props of the fourth descendant, we can get the descendant id from the list and use it to lookup in the map:
 
 ```js
-const id = list.current[3]
+const id = list.current[3]._internalId
 const props = map.current[id] // All of the props passed to `useDescendant` by the fourth descendant
 ```
 
