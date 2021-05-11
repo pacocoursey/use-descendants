@@ -31,7 +31,7 @@ export const useDescendants = () => {
       })
 
     if (domListChanged) {
-      list.current = newList.map(element => {
+      list.current = newList.map((element) => {
         const props = map.current[element.getAttribute('data-descendant')]
 
         return {
@@ -52,10 +52,7 @@ export const useDescendants = () => {
 }
 
 // No idea what the chance of collision is here, probably fine?
-const genId = () =>
-  `_${Math.random()
-    .toString(36)
-    .substr(2, 9)}`
+const genId = () => `_${Math.random().toString(36).substr(2, 9)}`
 
 export const useDescendant = (ctx, props) => {
   const index = useRef(-1)
@@ -71,11 +68,13 @@ export const useDescendant = (ctx, props) => {
     return () => {
       // Remove from parent "state" on unmount
       delete map.current[id.current]
-      list.current = list.current.filter(a => a._internalId !== id.current)
+      list.current = list.current.filter((a) => a._internalId !== id.current)
 
       // Clean up local "state"
       index.current = -1
       id.current = undefined
+
+      force({})
     }
   }, [])
 
@@ -92,7 +91,7 @@ export const useDescendant = (ctx, props) => {
   }
 
   index.current = list.current.findIndex(
-    item => item._internalId === id.current
+    (item) => item._internalId === id.current
   )
 
   return { index: index.current, ref, id: id.current }
