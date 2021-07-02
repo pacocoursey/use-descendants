@@ -58,11 +58,11 @@ export const useDescendant = (ctx, props) => {
   const index = useRef(-1)
   const ref = useRef()
   const { list, map, force } = useContext(ctx)
-  const id = useRef(null)
+  const id = useRef()
 
   useIsomorphicLayoutEffect(() => {
     // Initialize id
-    if (id.current === null) {
+    if (!id.current) {
       id.current = genId()
     }
     
