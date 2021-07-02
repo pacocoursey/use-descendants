@@ -58,9 +58,14 @@ export const useDescendant = (ctx, props) => {
   const index = useRef(-1)
   const ref = useRef()
   const { list, map, force } = useContext(ctx)
-  const id = useRef(genId())
+  const id = useRef(null)
 
   useIsomorphicLayoutEffect(() => {
+    // Initialize id
+    if (id.current === null) {
+      id.current = genId()
+    }
+    
     // Do this once, on mount, so that parent map is populated ASAP
     map.current[id.current] = { ...props, _internalId: id.current }
     force({})
@@ -83,16 +88,16 @@ export const useDescendant = (ctx, props) => {
     if (ref.current) {
       ref.current.setAttribute('data-descendant', id.current)
     }
+    
+    // Keep props up to date on every render
+    if (map.current?.[id.current]) {
+      map.current[id.current] = { ...props, _internalId: id.current }
+    }
+
+    index.current = list.current.findIndex(
+      (item) => item._internalId === id.current
+    )
   })
-
-  // Keep props up to date on every render
-  if (map.current?.[id.current]) {
-    map.current[id.current] = { ...props, _internalId: id.current }
-  }
-
-  index.current = list.current.findIndex(
-    (item) => item._internalId === id.current
-  )
 
   return { index: index.current, ref, id: id.current }
 }
