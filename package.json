@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "prepublish": "yarn build",
     "build": "microbundle --compress --no-sourcemap"
   },
   "devDependencies": {
