@@ -1,6 +1,6 @@
 {
   "name": "use-descendants",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.modern.js",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "prepublish": "yarn build",
-    "build": "microbundle --compress --no-sourcemap"
+    "build": "microbundle --compress --no-sourcemap --jsx React.createElement"
   },
   "devDependencies": {
     "microbundle": "^0.13.3"
