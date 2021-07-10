@@ -1,6 +1,6 @@
 {
   "name": "use-descendants",
-  "version": "0.0.4",
+  "version": "1.0.0-beta.2",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.modern.js",
@@ -13,10 +13,10 @@
     "build": "microbundle --compress --no-sourcemap"
   },
   "devDependencies": {
-    "microbundle": "^0.12.3"
+    "microbundle": "^0.13.3"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "*",
+    "react-dom": "*"
   }
 }
