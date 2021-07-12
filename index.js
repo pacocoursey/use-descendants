@@ -27,11 +27,13 @@ export const useDescendants = () => {
   const get = (id, props) => {
     if (!map.current[id]) map.current[id] = { index: indexCounter.current++ }
     map.current[id].props = props
-    return map.current
+    return map.current[id].index
   }
 
-  // Memoize context value
-  return React.useMemo(() => ({ get, map, reset }), [])
+  // Do NOT memoize context value, so that we bypass React.memo on any children
+  // We NEED them to re-render, in case stable children were re-ordered
+  // (this creates a new object every render, so children reading the context MUST re-render)
+  return { get, map, reset }
 }
 
 /**
