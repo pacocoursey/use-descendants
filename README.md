@@ -1,4 +1,4 @@
-# useDescendants ![npm bundle size](https://img.shields.io/bundlephobia/minzip/use-descendants)
+# useDescendants ![npm bundle size](https://img.shields.io/bundlephobia/minzip/use-descendants@beta)
 
 > This is the README for beta releases. The "stable" (but still v0) release is here: https://github.com/pacocoursey/use-descendants/tree/v0
 
@@ -48,7 +48,13 @@ const Item = () => {
 }
 ```
 
-You can pass any data you want to `useDescendant` and it will be available in the parent through the `map` ref:
+#### React.memo
+
+Items that use `React.memo` or stable keys will still have an up-to-date index, as they will be forcefully re-rendered whenever the parent re-renders. This means you can safely remove `React.memo`, as it will always be bypassed.
+
+#### Data passing
+
+You can pass any data you want to `useDescendant` and it will be available in the parent through `map`:
 
 ```jsx
 // In Item
@@ -61,7 +67,7 @@ console.log(context.map.current)
 // => { '<randomItemId>': { index: 0, props: { ref: HTMLDivElement } } }
 ```
 
-You can also pass un-memoized values or callbacks here because it's just kept in a ref:
+You can also pass un-memoized values or callbacks that are always up-to-date here because it's just kept in a ref:
 
 ```jsx
 const index = useDescendant({
@@ -74,4 +80,4 @@ const index = useDescendant({
 ## Credits
 
 - [@reach/descendants](https://www.npmjs.com/package/@reach/descendants) and [Chance](https://twitter.com/chancethedev), who introduced me to this concept
-- @shuding for help with a faster, simpler implementation
+- [Shu Ding](https://twitter.com/shuding_) for help with a faster, simpler implementation
