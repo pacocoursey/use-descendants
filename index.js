@@ -2,6 +2,8 @@ import * as React from 'react'
 
 const DescendantContext = React.createContext({})
 const randomId = () => Math.random().toString(36).substr(2, 9)
+const noop = () => {}
+const useLayout = typeof window === 'undefined' ? noop : React.useLayoutEffect
 
 export const Descendants = (props) => {
   // On every re-render of children, reset the count
@@ -44,5 +46,13 @@ export function useDescendant(props) {
   const context = React.useContext(DescendantContext)
   const descendantId = React.useRef()
   if (!descendantId.current) descendantId.current = randomId()
-  return context?.get(descendantId.current, props)
+  const [index, setIndex] = React.useState(-1)
+
+  useLayout(() => {
+    // Do this inside of useLayoutEffect, it's only
+    // called for the "real render" in React strict mode
+    setIndex(context?.get(descendantId.current, props))
+  })
+
+  return index
 }
