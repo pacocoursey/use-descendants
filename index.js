@@ -27,7 +27,9 @@ export const useDescendants = () => {
   }
 
   const get = (id, props) => {
-    if (!map.current[id]) map.current[id] = { index: indexCounter.current++ }
+    const hidden = props ? props.hidden : false
+    if (!map.current[id])
+      map.current[id] = { index: hidden ? -1 : indexCounter.current++ }
     map.current[id].props = props
     return map.current[id].index
   }
