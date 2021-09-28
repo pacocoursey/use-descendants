@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const DescendantContext = React.createContext({})
+const DescendantContext = React.createContext()
 const randomId = () => Math.random().toString(36).substr(2, 9)
 const noop = () => {}
 const useLayout = typeof window === 'undefined' ? noop : React.useLayoutEffect
