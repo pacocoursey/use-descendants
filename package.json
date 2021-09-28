@@ -1,6 +1,6 @@
 {
   "name": "use-descendants",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.modern.js",
